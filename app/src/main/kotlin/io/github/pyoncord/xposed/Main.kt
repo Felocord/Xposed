@@ -1,4 +1,4 @@
-package io.github.pyoncord.xposed
+package io.github.felitendo.xposed
 
 import android.content.res.AssetManager
 import android.content.res.Resources
@@ -7,7 +7,7 @@ import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.callbacks.XC_LoadPackage
-import io.github.pyoncord.xposed.BuildConfig
+import io.github.felitendo.xposed.BuildConfig
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -39,7 +39,7 @@ class Main : IXposedHookLoadPackage {
 
     fun buildLoaderJsonString(): String {
         val obj = buildJsonObject {
-            put("loaderName", "BunnyXposed")
+            put("loaderName", "FelocordXposed")
             put("loaderVersion", BuildConfig.VERSION_NAME)
 
             for (module in pyonModules) {
@@ -77,8 +77,8 @@ class Main : IXposedHookLoadPackage {
             String::class.java
         ).apply { isAccessible = true }
 
-        val cacheDir = File(appInfo.dataDir, "cache/pyoncord").apply { mkdirs() }
-        val filesDir = File(appInfo.dataDir, "files/pyoncord").apply { mkdirs() }
+        val cacheDir = File(appInfo.dataDir, "cache/felitendo").apply { mkdirs() }
+        val filesDir = File(appInfo.dataDir, "files/felitendo").apply { mkdirs() }
 
         val preloadsDir = File(filesDir, "preloads").apply { mkdirs() }
         val bundle = File(cacheDir, "bundle.js")
@@ -93,7 +93,7 @@ class Main : IXposedHookLoadPackage {
             LoaderConfig(
                 customLoadUrl = CustomLoadUrl(
                     enabled = false,
-                    url = "http://localhost:4040/pyoncord.js"
+                    url = "http://localhost:4040/felitendo.js"
                 )
             )
         }
@@ -105,12 +105,12 @@ class Main : IXposedHookLoadPackage {
                     install(HttpTimeout) {
                         requestTimeoutMillis = if (bundle.exists()) 3000 else HttpTimeout.INFINITE_TIMEOUT_MS
                     }
-                    install(UserAgent) { agent = "BunnyXposed" }
+                    install(UserAgent) { agent = "FelocordXposed" }
                 }
 
                 val url = 
                     if (config.customLoadUrl.enabled) config.customLoadUrl.url 
-                    else "https://raw.githubusercontent.com/pyoncord/detta-builds/main/bunny.js"
+                    else "https://raw.githubusercontent.com/felitendo/detta-builds/main/felocord.js"
 
                 val response: HttpResponse = client.get(url) {
                     headers { 
@@ -128,7 +128,7 @@ class Main : IXposedHookLoadPackage {
 
                 return@async
             } catch (e: Throwable) {
-                Log.e("Bunny", "Failed to download bundle", e)
+                Log.e("Felocord", "Failed to download bundle", e)
             }
         }
 

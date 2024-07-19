@@ -1,4 +1,4 @@
-package io.github.pyoncord.xposed
+package io.github.felitendo.xposed
 
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 import kotlinx.serialization.json.JsonObjectBuilder

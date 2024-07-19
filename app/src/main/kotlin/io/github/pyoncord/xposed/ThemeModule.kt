@@ -1,4 +1,4 @@
-package io.github.pyoncord.xposed
+package io.github.felitendo.xposed
 
 import android.content.Context
 import android.graphics.Color
@@ -67,7 +67,7 @@ class ThemeModule : PyonModule() {
 
     fun getTheme(): Theme? {
         val filesDir = File(param.appInfo.dataDir, "files").apply { mkdirs() }
-        val pyonDir = File(filesDir, "pyoncord").apply { mkdirs() }
+        val pyonDir = File(filesDir, "felitendo").apply { mkdirs() }
         val themeFile = File(pyonDir, "current-theme.json")
 
         val legacyThemeFile = File(filesDir, "vendetta_theme.json")

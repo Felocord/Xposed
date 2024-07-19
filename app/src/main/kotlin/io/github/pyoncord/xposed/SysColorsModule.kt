@@ -1,4 +1,4 @@
-package io.github.pyoncord.xposed
+package io.github.felitendo.xposed
 
 import android.app.AndroidAppHelper
 import android.content.Context
