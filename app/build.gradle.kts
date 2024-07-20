@@ -12,8 +12,8 @@ android {
         applicationId = "io.github.felitendo.xposed"
         minSdk = 24
         targetSdk = 33
-        versionCode = 104
-        versionName = "v1.0.4"
+        versionCode = 105
+        versionName = "v1.0.5"
     }
 
     buildTypes {
