@@ -110,7 +110,7 @@ class Main : IXposedHookLoadPackage {
 
                 val url = 
                     if (config.customLoadUrl.enabled) config.customLoadUrl.url 
-                    else "https://raw.githubusercontent.com/felocord/builds/main/felocord.js"
+                    else "https://raw.githubusercontent.com/Felocord/builds/main/felocord.js"
 
                 val response: HttpResponse = client.get(url) {
                     headers { 
