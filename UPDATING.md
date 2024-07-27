@@ -1,4 +1,11 @@
-This is how to update to the latest upstream repo:
+How to update to latest upstream repo:
 
-- git pull public master
-- git push origin master
+First Time:
+
+- git remote add public https://github.com/pyoncord/BunnyXPosed
+
+Then:
+
+- git pull public main
+- git commit -am "Updated from main repo"
+- git push origin main
