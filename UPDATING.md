@@ -6,6 +6,6 @@ First Time:
 
 Then:
 
-- git pull public main
-- git commit -am "Updated from main repo"
-- git push origin main
+- git pull public master --no-commit
+- git commit -am "Merged updates from upstream repo"
+- git push origin master
