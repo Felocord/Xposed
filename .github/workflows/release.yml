@@ -43,7 +43,7 @@ jobs:
       run: |
         echo "${{ secrets.keystore }}" | base64 -d > $GITHUB_WORKSPACE/signing-key.jks
         chmod +x ./gradlew
-        ./gradlew packageReleaseUniversalApk \
+        ./gradlew assembleRelease \
           -Pandroid.injected.signing.store.file=$GITHUB_WORKSPACE/signing-key.jks \
           -Pandroid.injected.signing.store.password=${{ secrets.keystore_password }} \
           -Pandroid.injected.signing.key.alias=${{ secrets.key_alias }} \
@@ -51,7 +51,12 @@ jobs:
 
     - name: Find and Rename APK
       run: |
-        mv app/build/outputs/apk_from_bundle/release/app-release-universal.apk ./app-release.apk
+        APK_PATH=$(find . -name "*release*.apk" | head -n 1)
+        if [ -z "$APK_PATH" ]; then
+          echo "No APK file found"
+          exit 1
+        fi
+        mv "$APK_PATH" ./app-release.apk
         cp ./app-release.apk ./BunnyXposed-${{ steps.extract_version.outputs.version }}.apk
         echo "APKs renamed and copied"
 
